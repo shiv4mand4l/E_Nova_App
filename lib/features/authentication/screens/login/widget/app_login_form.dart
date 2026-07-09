@@ -1,7 +1,9 @@
 import 'package:e_nova/common/widgets/buttons/app_elevated_button.dart';
+import 'package:e_nova/routes/app_routes.dart';
 import 'package:e_nova/utlis/constants/app_sizes.dart';
 import 'package:e_nova/utlis/constants/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AppLoginForm extends StatelessWidget {
@@ -14,7 +16,7 @@ class AppLoginForm extends StatelessWidget {
         Column(
           crossAxisAlignment: .start,
           children: [
-            Text(AppText.email),
+            Text(AppText.email, style: Theme.of(context).textTheme.bodyLarge),
             TextField(
               decoration: InputDecoration(
                 // labelText: AppText.email,
@@ -22,7 +24,10 @@ class AppLoginForm extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppSizes.spaceBtwInputFields),
-            Text(AppText.password),
+            Text(
+              AppText.password,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
 
             TextField(
               decoration: InputDecoration(
@@ -38,7 +43,9 @@ class AppLoginForm extends StatelessWidget {
           child: Transform.translate(
             offset: Offset(0, -5),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push(AppRoutes.appForgotPasswordScreen);
+              },
               child: Text(AppText.forgetPassword),
             ),
           ),
@@ -48,7 +55,7 @@ class AppLoginForm extends StatelessWidget {
         // Signin Button
         SizedBox(
           width: double.infinity,
-          child: AppElevatedButton(onTap: () {}, btnName: AppText.signIn),
+          child: AppElevatedButton(onTap: () {}, btnName: AppText.logIn),
         ),
       ],
     );

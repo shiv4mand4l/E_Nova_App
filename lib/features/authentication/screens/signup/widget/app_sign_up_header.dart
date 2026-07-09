@@ -2,23 +2,23 @@ import 'package:e_nova/utlis/constants/app_sizes.dart';
 import 'package:e_nova/utlis/constants/app_text.dart';
 import 'package:flutter/material.dart';
 
-class AppLoginHeader extends StatelessWidget {
-  const AppLoginHeader({super.key});
+class AppSignUpHeader extends StatelessWidget {
+  const AppSignUpHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          AppText.logInTitle,
           textAlign: .center,
-          style: Theme.of(context).textTheme.headlineLarge,
+          AppText.signUpTitle,
+          style: TextTheme.of(context).headlineLarge,
         ),
         SizedBox(height: AppSizes.spaceBtwItems),
         Text(
-          AppText.logInSubTitle,
           textAlign: .center,
-          style: Theme.of(context).textTheme.titleSmall,
+          AppText.signUpSubTitle,
+          style: TextTheme.of(context).titleSmall,
         ),
       ],
     );

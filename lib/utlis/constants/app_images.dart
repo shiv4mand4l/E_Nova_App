@@ -12,4 +12,8 @@ class AppImages {
   // App Login Social Icons
   static const String socialLogo1 = 'assets/images/googleLogo.png';
   static const String socialLogo2 = 'assets/images/facebookLogo.png';
+
+  // App Verify Email Screen Animation
+  static const String verifyEmail =
+      'assets/animations/emailSendInVerifyScreen.json';
 }

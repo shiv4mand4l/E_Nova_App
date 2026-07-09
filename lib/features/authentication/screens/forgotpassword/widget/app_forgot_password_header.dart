@@ -2,22 +2,20 @@ import 'package:e_nova/utlis/constants/app_sizes.dart';
 import 'package:e_nova/utlis/constants/app_text.dart';
 import 'package:flutter/material.dart';
 
-class AppLoginHeader extends StatelessWidget {
-  const AppLoginHeader({super.key});
+class AppForgotPasswordHeader extends StatelessWidget {
+  const AppForgotPasswordHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          AppText.logInTitle,
-          textAlign: .center,
+          AppText.forgotPassTitle,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         SizedBox(height: AppSizes.spaceBtwItems),
         Text(
-          AppText.logInSubTitle,
-          textAlign: .center,
+          AppText.forgotPassSubTitle,
           style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
