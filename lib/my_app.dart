@@ -1,4 +1,4 @@
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
 import 'package:e_nova/routes/app_router.dart';
 import 'package:e_nova/utlis/theme/app_theme.dart';
 import 'package:flutter/material.dart';

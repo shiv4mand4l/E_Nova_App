@@ -1,7 +1,15 @@
 class AppImages {
   AppImages._();
 
-  static const String onBoadringImage1 = 'assets/images/image1.png';
-  static const String onBoadringImage2 = 'assets/images/Image2.png';
-  static const String onBoadringImage3 = 'assets/images/image3.png';
+  // App Onboarding Screen Animations
+  static const String onBoadringAnimation1 =
+      'assets/animations/onboarding1.json';
+  static const String onBoadringAnimation2 =
+      'assets/animations/onboarding2.json';
+  static const String onBoadringAnimation3 =
+      'assets/animations/onboarding3.json';
+
+  // App Login Social Icons
+  static const String socialLogo1 = 'assets/images/googleLogo.png';
+  static const String socialLogo2 = 'assets/images/facebookLogo.png';
 }

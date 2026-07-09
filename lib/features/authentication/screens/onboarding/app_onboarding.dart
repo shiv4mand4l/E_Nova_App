@@ -1,9 +1,9 @@
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
-import 'package:e_nova/features/screens/onboarding/widgets/onboarding_page.dart';
-import 'package:e_nova/features/screens/onboarding/widgets/onboarding_primary_and_skip_btn.dart';
-import 'package:e_nova/features/screens/onboarding/widgets/onboarding_smooth_indicator.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/widgets/onboarding_primary_and_skip_btn.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/widgets/onboarding_smooth_indicator.dart';
 import 'package:e_nova/utlis/constants/app_images.dart';
 import 'package:e_nova/utlis/constants/app_text.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +41,17 @@ class AppOnboarding extends StatelessWidget {
                 OnBoardingPage(
                   title: AppText.firstOnBoarding1Title,
                   subTitle: AppText.firstOnBoarding1Subtitle,
-                  image: AppImages.onBoadringImage1,
+                  animation: AppImages.onBoadringAnimation1,
                 ),
                 OnBoardingPage(
                   title: AppText.secondOnBoarding1Title,
                   subTitle: AppText.secondOnBoarding1Subtitle,
-                  image: AppImages.onBoadringImage2,
+                  animation: AppImages.onBoadringAnimation2,
                 ),
                 OnBoardingPage(
                   title: AppText.thirdOnBoarding1Title,
                   subTitle: AppText.thirdOnBoarding1Subtitle,
-                  image: AppImages.onBoadringImage3,
+                  animation: AppImages.onBoadringAnimation3,
                 ),
               ],
             ),

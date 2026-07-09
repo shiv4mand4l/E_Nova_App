@@ -15,4 +15,19 @@ class AppText {
   static const String thirdOnBoarding1Title = 'Achieve Your\nGoals';
   static const String thirdOnBoarding1Subtitle =
       'Learn new skill and upgrade\nyour future.';
+
+  // The Below Texts belongs for Signin Screen
+  static const String signinTitle = 'Welcome Back!';
+  static const String signinSubTitle =
+      'Login to continue your\nlearning journey';
+  static const String email = 'Email';
+  static const String emailExample = 'name@example.com';
+  static const String password = 'Password';
+  static const String passwordExample = '* * * * * * * *';
+  static const String rememberMe = 'RememberMe';
+  static const String forgetPassword = 'Forget Password ?';
+  static const String signIn = 'Sign In';
+  static const String orContinueWith = 'Or Continue With';
+  static const String createAccount = "Don't have an acoount? ";
+  static const String signUp = 'SignUp';
 }

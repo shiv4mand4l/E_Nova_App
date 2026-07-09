@@ -19,6 +19,8 @@ dependencies:
   go_router: ^17.3.0
   bloc: ^9.2.1
   equatable: ^2.0.8
+  lottie: ^3.5.1
+  iconsax: ^0.0.8
 
   # --------------[Utilities]---------------------
 
@@ -34,6 +36,7 @@ flutter:
   # ------------------[Assets]-------------------
   assets:
     - assets/fonts/
+    - assets/animations/
     - assets/images/
   # ------------------[Fonts]-------------------
   fonts:

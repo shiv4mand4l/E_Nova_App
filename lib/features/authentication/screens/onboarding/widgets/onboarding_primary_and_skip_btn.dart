@@ -1,8 +1,8 @@
 import 'package:e_nova/common/widgets/buttons/app_elevated_button.dart';
 import 'package:e_nova/common/widgets/buttons/app_text_button.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_bloc.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
 import 'package:e_nova/routes/app_routes.dart';
 import 'package:e_nova/utlis/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class OnBoardingPrimaryAndSkipBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: AppSizes.spaceBtwItems * 4,
+      bottom: AppSizes.spaceBtwItems * 5,
       left: AppSizes.w(context, 0.03),
       right: AppSizes.w(context, 0.06),
       child: Row(

@@ -4,7 +4,7 @@ class AppDeviceHelper {
   AppDeviceHelper._();
 
   static double getAppBarHeight() {
-    return kToolbarHeight * 1.7;
+    return kToolbarHeight * 2;
   }
 
   static double getBottonNavBarHeight() {

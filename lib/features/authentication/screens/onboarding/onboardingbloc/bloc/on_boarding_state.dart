@@ -8,6 +8,7 @@ class OnBoardingState extends Equatable {
 
   OnBoardingState({this.btnName, this.skip = false, this.isLastPage = false});
 
+  // This is for First Initilization of Skip, Button , and Last page
   OnBoardingState copyWith({
     String? btnName = 'Next',
     bool? skip,

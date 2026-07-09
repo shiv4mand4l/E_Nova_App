@@ -1,5 +1,5 @@
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
-import 'package:e_nova/features/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_event.dart';
+import 'package:e_nova/features/authentication/screens/onboarding/onboardingbloc/bloc/on_boarding_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {

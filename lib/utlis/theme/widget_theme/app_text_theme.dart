@@ -117,7 +117,7 @@ class AppTextTheme {
 
     titleMedium: TextStyle(
       fontSize: 18.0,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w700,
       color: AppColors.lightText,
     ),
 

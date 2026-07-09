@@ -3,4 +3,5 @@ class AppRoutes {
 
   static const appOnboardingScreen = '/';
   static const appLoginScreen = '/appLoginScreen';
+  static const appSignUpScreen = '/appSignUpScreen';
 }
