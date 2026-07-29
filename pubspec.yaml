@@ -15,14 +15,19 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   smooth_page_indicator: ^2.0.1
-  flutter_bloc: ^9.1.1
-  go_router: ^17.3.0
-  bloc: ^9.2.1
-  equatable: ^2.0.8
   lottie: ^3.5.1
   iconsax: ^0.0.8
 
+  # -------------------[Go Router]-------------------
+  go_router: ^17.3.0
+
+  # -------------------[State Management]-------------------
+  flutter_bloc: ^9.1.1
+  bloc: ^9.2.1
+
   # --------------[Utilities]---------------------
+  equatable: ^2.0.8
+  fpdart: ^1.2.0
 
 dev_dependencies:
   flutter_test:
