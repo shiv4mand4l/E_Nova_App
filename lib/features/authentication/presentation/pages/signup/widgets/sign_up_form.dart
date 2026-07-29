@@ -1,121 +1,215 @@
 import 'package:e_nova/core/common/widgets/buttons/app_elevated_button.dart';
-import 'package:e_nova/core/routes/app_routes.dart';
+import 'package:e_nova/core/common/widgets/snackbars/app_snackbar.dart';
 import 'package:e_nova/core/constants/app_colors.dart';
 import 'package:e_nova/core/constants/app_sizes.dart';
 import 'package:e_nova/core/constants/app_strings.dart';
+import 'package:e_nova/core/helpers/validator.dart';
+import 'package:e_nova/features/authentication/params/sign_up_params.dart';
+import 'package:e_nova/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class SignUpForm extends StatelessWidget {
+class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
+
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  final TextEditingController firstNameController = TextEditingController();
+
+  final TextEditingController lastNameController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController conformPasswordController =
+      TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    conformPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Column(
-      children: [
-        // First Name or Last Name
-        Row(
-          spacing: AppSizes.spaceBtwItems,
-          children: [
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: AppStrings.firstName,
-                  prefixIcon: Icon(Iconsax.user),
-                ),
-              ),
-            ),
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: AppStrings.lastName,
-                  prefixIcon: Icon(Iconsax.user),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: AppSizes.spaceBtwInputFields),
+    return Form(
+      key: _formKey,
 
-        // Email..........
-        Column(
-          crossAxisAlignment: .start,
-          children: [
-            Text(
-              AppStrings.email,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            TextFormField(
-              keyboardType: .emailAddress,
-              decoration: InputDecoration(hintText: AppStrings.emailExample),
-            ),
-            SizedBox(height: AppSizes.spaceBtwInputFields),
-            Text(
-              AppStrings.password,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: AppStrings.passwordExample,
-                suffixIcon: Icon(Iconsax.eye_slash),
-              ),
-            ),
-            SizedBox(height: AppSizes.spaceBtwInputFields),
-            Text(
-              AppStrings.conformPassword,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: AppStrings.passwordExample,
-                suffixIcon: Icon(Iconsax.eye_slash),
-              ),
-            ),
-            SizedBox(height: AppSizes.spaceBtwInputFields),
-          ],
-        ),
-        Transform.translate(
-          offset: Offset(0, -10),
-          child: Row(
+      child: Column(
+        children: [
+          // First Name or Last Name
+          Row(
+            spacing: AppSizes.spaceBtwItems,
             children: [
-              Checkbox(value: true, onChanged: (value) {}),
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(color: AppColors.primary, fontWeight: .bold),
-                  children: [
-                    TextSpan(
-                      text: AppStrings.privacyPolicyPart1,
-                      style: TextStyle(
-                        color: isDark ? AppColors.white : AppColors.darkGrey,
-                      ),
-                    ),
-                    TextSpan(text: AppStrings.privacyPolicypart2),
-                    TextSpan(
-                      text: AppStrings.privacyPolicyPart3,
-                      style: TextStyle(
-                        color: isDark ? AppColors.white : AppColors.darkGrey,
-                      ),
-                    ),
-                    TextSpan(text: AppStrings.privacyPolicyPart4),
-                  ],
+              Expanded(
+                child: TextFormField(
+                  validator: AppValidator.validateFirstName,
+                  controller: firstNameController,
+                  decoration: InputDecoration(
+                    hintText: AppStrings.firstName,
+                    prefixIcon: Icon(Iconsax.user),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  validator: AppValidator.validateLastName,
+                  controller: lastNameController,
+                  decoration: InputDecoration(
+                    hintText: AppStrings.lastName,
+                    prefixIcon: Icon(Iconsax.user),
+                  ),
                 ),
               ),
             ],
           ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: AppElevatedButton(
-            btnName: AppStrings.signUp,
-            onTap: () {
-              context.push(AppRoutes.appVerifyYourEmailScreen);
-            },
+          SizedBox(height: AppSizes.spaceBtwInputFields),
+
+          // Email..........
+          Column(
+            crossAxisAlignment: .start,
+            children: [
+              Text(
+                AppStrings.email,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              TextFormField(
+                validator: AppValidator.validateEmail,
+                controller: emailController,
+                keyboardType: .emailAddress,
+                decoration: InputDecoration(hintText: AppStrings.emailExample),
+              ),
+              SizedBox(height: AppSizes.spaceBtwInputFields),
+              Text(
+                AppStrings.password,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              TextFormField(
+                validator: AppValidator.validatePassword,
+                controller: passwordController,
+                decoration: InputDecoration(
+                  hintText: AppStrings.passwordExample,
+                  suffixIcon: Icon(Iconsax.eye_slash),
+                ),
+              ),
+              SizedBox(height: AppSizes.spaceBtwInputFields),
+              Text(
+                AppStrings.conformPassword,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              TextFormField(
+                validator: (value) => AppValidator.validateConfirmPassword(
+                  passwordController.text,
+                  value,
+                ),
+                controller: conformPasswordController,
+                decoration: InputDecoration(
+                  hintText: AppStrings.passwordExample,
+                  suffixIcon: Icon(Iconsax.eye_slash),
+                ),
+              ),
+              SizedBox(height: AppSizes.spaceBtwInputFields),
+            ],
           ),
-        ),
-      ],
+          Transform.translate(
+            offset: Offset(0, -10),
+            child: Row(
+              children: [
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    final bool isAccepted = state is AuthTermsChanged
+                        ? state.isAccepted
+                        : false;
+                    return Checkbox(
+                      value: isAccepted,
+                      onChanged: (value) {
+                        context.read<AuthBloc>().add(
+                          OnTermsAcceptedChanged(value ?? false),
+                        );
+                      },
+                    );
+                  },
+                ),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: .bold,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: AppStrings.privacyPolicyPart1,
+                        style: TextStyle(
+                          color: isDark ? AppColors.white : AppColors.darkGrey,
+                        ),
+                      ),
+                      TextSpan(text: AppStrings.privacyPolicypart2),
+                      TextSpan(
+                        text: AppStrings.privacyPolicyPart3,
+                        style: TextStyle(
+                          color: isDark ? AppColors.white : AppColors.darkGrey,
+                        ),
+                      ),
+                      TextSpan(text: AppStrings.privacyPolicyPart4),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                final bool isAccepted = state is AuthTermsChanged
+                    ? state.isAccepted
+                    : false;
+                return AppElevatedButton(
+                  btnName: AppStrings.signUp,
+                  onTap: isAccepted
+                      ? () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                              OnAuthSignUp(
+                                SignUpParams(
+                                  firstName: firstNameController.text.trim(),
+                                  lastName: lastNameController.text.trim(),
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                  confirmPassword: conformPasswordController
+                                      .text
+                                      .trim(),
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      : () {
+                          // ----------------------------------- PopUp banner here---------------------------------------------
+                          AppSnackbar.warning(
+                            context,
+                            message: 'Something is missing...',
+                          );
+                        },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

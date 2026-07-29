@@ -1,37 +1,39 @@
 import 'package:e_nova/core/error/failures.dart';
+import 'package:e_nova/features/authentication/domain/entities/user_entity.dart';
+import 'package:e_nova/features/authentication/params/forgot_password_params.dart';
+import 'package:e_nova/features/authentication/params/log_in_params.dart';
+import 'package:e_nova/features/authentication/params/reset_password_params.dart';
+import 'package:e_nova/features/authentication/params/sign_up_params.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class AuthRepository {
-  Future<Either<Failures, String>> signUp({
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String password,
-    required String conformPassword,
-    required bool isCheckedTCandPP,
-  });
+  Future<Either<Failures, UserEntity>> signUp({SignUpParams signUpParams});
 
-  Future<Either<Failures, String>> logIn({
-    required String email,
-    required String password,
-  });
+  Future<Either<Failures, UserEntity>> logIn({LogInParams logInParams});
 
   Future<Either<Failures, String>> logOut();
 
-  Future<Either<Failures, String>> forgotPassword({required String email});
+  Future<Either<Failures, String>> forgotPassword({
+    ForgotPasswordParams forgotPasswordParams,
+  });
 
   Future<Either<Failures, String>> resetPassword({
-    required String newPassword,
-    required String confirmPassword,
+    ResetPasswordParams resetPasswordParams,
   });
 
   Future<Either<Failures, String>> sendEmailVerification();
 
-  Future<Either<Failures, String>> isEmailVerified();
+  Future<Either<Failures, bool>> isEmailVerified();
 
   Future<Either<Failures, String>> getCurrentUser();
 
   Future<Either<Failures, String>> googleSignIn();
 
+  Future<Either<Failures, String>> googleSignOut();
+
   Future<Either<Failures, String>> facebookSignIn();
+
+  Future<Either<Failures, String>> facebookSignOut();
+
+  Future<Either<Failures, bool>> checkAuthStatus();
 }

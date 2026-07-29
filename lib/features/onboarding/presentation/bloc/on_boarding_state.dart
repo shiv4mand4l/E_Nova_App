@@ -31,13 +31,15 @@ class OnBoardingState extends Equatable {
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // This is for When the user is first time in app the the user have to show OnBoarding Screen and If! then the user directly goes on Login Screen
-class AppInitial extends OnBoardingState {}
+class OnboardingInitial extends OnBoardingState {}
 
 // The app is checking local storage for the flag
-class AppCheckingStatus extends OnBoardingState {}
+class OnboardingLoading extends OnBoardingState {}
 
 // First time user -> Show Onboarding
-class AppOnboardingRequired extends OnBoardingState {}
+class GotoOnboarding extends OnBoardingState {}
 
 // Not first time -> Show Login
-class AppLoginRequired extends OnBoardingState {}
+class GotoLogin extends OnBoardingState {}
+
+class GotoHome extends OnBoardingState {}

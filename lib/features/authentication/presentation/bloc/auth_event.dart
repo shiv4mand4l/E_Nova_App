@@ -1,15 +1,29 @@
-abstract class AuthEvent {}
+part of 'auth_bloc.dart';
 
-class LoginRequested extends AuthEvent {}
+sealed class AuthEvent extends Equatable {
+  const AuthEvent();
 
-class SignupRequested extends AuthEvent {}
+  @override
+  List<Object> get props => [];
+}
 
-class LogoutRequested extends AuthEvent {}
+final class OnTermsAcceptedChanged extends AuthEvent {
+  final bool isAccepted;
 
-class ForgotPasswordRequested extends AuthEvent {}
+  const OnTermsAcceptedChanged(this.isAccepted);
 
-class ResetPasswordRequested extends AuthEvent {}
+  @override
+  List<Object> get props => [isAccepted];
+}
 
-class VerifyEmailRequested extends AuthEvent {}
+final class OnAuthSignUp extends AuthEvent {
+  final SignUpParams signUpParams;
 
-class CheckAuthStatusRequested extends AuthEvent {}
+  const OnAuthSignUp(this.signUpParams);
+}
+
+final class OnAuthLogIn extends AuthEvent {
+  final LogInParams logInParams;
+
+  const OnAuthLogIn(this.logInParams);
+}

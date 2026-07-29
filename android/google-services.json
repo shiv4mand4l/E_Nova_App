@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "972820353535",
+    "project_id": "enova-2083",
+    "storage_bucket": "enova-2083.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972820353535:android:7de174157ef20c308817ca",
+        "android_client_info": {
+          "package_name": "com.example.e_nova"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYzuxXW-MVUzfcpM7Fsk38mmKiX8jpIyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

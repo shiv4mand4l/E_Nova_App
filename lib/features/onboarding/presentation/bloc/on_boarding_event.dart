@@ -22,4 +22,4 @@ class ResetSkipBtnEvent extends OnBoardingEvent {}
 // This is for When the user is first time in app the the user have to show OnBoarding Screen and If! then the user directly goes on Login Screen
 
 // Runs immediately when the app starts
-class AppLunchStatus extends OnBoardingEvent {}
+class CheckAppStatus extends OnBoardingEvent {}

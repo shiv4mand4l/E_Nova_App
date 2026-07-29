@@ -9,10 +9,21 @@ import 'package:e_nova/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AppOnboarding extends StatelessWidget {
-  AppOnboarding({super.key});
+class AppOnboarding extends StatefulWidget {
+  const AppOnboarding({super.key});
 
+  @override
+  State<AppOnboarding> createState() => _AppOnboardingState();
+}
+
+class _AppOnboardingState extends State<AppOnboarding> {
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<OnBoardingBloc>().add(CheckAppStatus());
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:e_nova/core/common/widgets/buttons/app_elevated_button.dart';
 import 'package:e_nova/core/common/widgets/buttons/app_text_button.dart';
+import 'package:e_nova/core/services/shared_pref_service.dart';
 import 'package:e_nova/features/onboarding/presentation/bloc/on_boarding_bloc.dart';
 import 'package:e_nova/features/onboarding/presentation/bloc/on_boarding_event.dart';
 import 'package:e_nova/features/onboarding/presentation/bloc/on_boarding_state.dart';
@@ -32,9 +33,10 @@ class OnBoardingPrimaryAndSkipBtn extends StatelessWidget {
           BlocBuilder<OnBoardingBloc, OnBoardingState>(
             builder: (context, state) {
               return AppElevatedButton(
-                onTap: () {
+                onTap: () async {
                   if (state.isLastPage == true) {
                     context.go(AppRoutes.appLoginScreen);
+                    await SharedPrefService().saveOnboardingStatus();
                   } else {
                     _pageController.nextPage(
                       duration: Duration(milliseconds: 300),

@@ -4,7 +4,6 @@ class SignUpParams {
   final String email;
   final String password;
   final String confirmPassword;
-  final bool isTCandPPtrue;
 
   SignUpParams({
     required this.firstName,
@@ -12,6 +11,5 @@ class SignUpParams {
     required this.email,
     required this.password,
     required this.confirmPassword,
-    required this.isTCandPPtrue,
   });
 }
