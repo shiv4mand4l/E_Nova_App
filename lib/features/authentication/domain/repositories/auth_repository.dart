@@ -1,10 +1,11 @@
+import 'package:fpdart/fpdart.dart';
+
 import 'package:e_nova/core/error/failures.dart';
 import 'package:e_nova/features/authentication/domain/entities/user_entity.dart';
 import 'package:e_nova/features/authentication/params/forgot_password_params.dart';
 import 'package:e_nova/features/authentication/params/log_in_params.dart';
 import 'package:e_nova/features/authentication/params/reset_password_params.dart';
 import 'package:e_nova/features/authentication/params/sign_up_params.dart';
-import 'package:fpdart/fpdart.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failures, UserEntity>> signUp({SignUpParams signUpParams});
@@ -13,11 +14,11 @@ abstract interface class AuthRepository {
 
   Future<Either<Failures, String>> logOut();
 
-  Future<Either<Failures, String>> forgotPassword({
-    ForgotPasswordParams forgotPasswordParams,
+  Future<Either<Failures, void>> forgotPassword({
+    ForgotPasswordParams? forgotPasswordParams,
   });
 
-  Future<Either<Failures, String>> resetPassword({
+  Future<Either<Failures, void>> sendResetPassword({
     ResetPasswordParams resetPasswordParams,
   });
 

@@ -1,5 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fpdart/fpdart.dart';
+
 import 'package:e_nova/core/error/exceptions.dart';
+import 'package:e_nova/core/error/failures.dart';
 import 'package:e_nova/core/services/firebase_service.dart';
 import 'package:e_nova/core/services/firestore_service.dart';
 import 'package:e_nova/features/authentication/data/models/user_model.dart';
@@ -7,7 +10,6 @@ import 'package:e_nova/features/authentication/params/forgot_password_params.dar
 import 'package:e_nova/features/authentication/params/log_in_params.dart';
 import 'package:e_nova/features/authentication/params/reset_password_params.dart';
 import 'package:e_nova/features/authentication/params/sign_up_params.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract interface class AuthFirebaseDatasource {
   Future<UserModel> signUp({SignUpParams signUpParams});
@@ -16,9 +18,9 @@ abstract interface class AuthFirebaseDatasource {
 
   Future<UserModel> logOut();
 
-  Future<UserModel> forgotPassword({ForgotPasswordParams forgotPasswordParams});
+  Future<void> forgotPassword({ForgotPasswordParams forgotPasswordParams});
 
-  Future<UserModel> resetPassword({ResetPasswordParams resetPasswordParams});
+  Future<void> sendResetPassword({ResetPasswordParams resetPasswordParams});
 
   Future<UserModel> sendEmailVerification();
 
@@ -53,51 +55,52 @@ class AuthFirebaseDatasourceImpl implements AuthFirebaseDatasource {
   // --------------------------------------[Facebook Sign In]------------------------------------------------
   @override
   Future<UserModel> facebookSignIn() {
-    // TODO: implement facebookSignIn
     throw UnimplementedError();
   }
 
   // --------------------------------------[Facebook Sign Out]------------------------------------------------
   @override
   Future<UserModel> facebookSignOut() {
-    // TODO: implement facebookSignOut
     throw UnimplementedError();
   }
 
   // --------------------------------------[Forgot Password]------------------------------------------------
   @override
-  Future<UserModel> forgotPassword({
+  Future<void> forgotPassword({
     ForgotPasswordParams? forgotPasswordParams,
-  }) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  }) async {
+    try {
+      await firebaseService.auth.sendPasswordResetEmail(
+        email: forgotPasswordParams!.email.trim(),
+      );
+    } on FirebaseException catch (e) {
+      Left(e.message);
+    } on ServerException catch (e) {
+      Left(Failures(e.message));
+    }
   }
 
   // --------------------------------------[Get Current User]------------------------------------------------
   @override
   Future<UserModel> getCurrentUser() {
-    // TODO: implement getCurrentUser
     throw UnimplementedError();
   }
 
   // --------------------------------------[Google Sign In]------------------------------------------------
   @override
   Future<UserModel> googleSignIn() {
-    // TODO: implement googleSignIn
     throw UnimplementedError();
   }
 
   // --------------------------------------[Google Sign Out]------------------------------------------------
   @override
   Future<UserModel> googleSignOut() {
-    // TODO: implement googleSignOut
     throw UnimplementedError();
   }
 
   // --------------------------------------[Is Email Verified]------------------------------------------------
   @override
   Future<bool> isEmailVerified() {
-    // TODO: implement isEmailVerified
     throw UnimplementedError();
   }
 
@@ -136,21 +139,30 @@ class AuthFirebaseDatasourceImpl implements AuthFirebaseDatasource {
   // --------------------------------------[Log Out]------------------------------------------------
   @override
   Future<UserModel> logOut() {
-    // TODO: implement logOut
     throw UnimplementedError();
   }
 
   // --------------------------------------[Reset Password]------------------------------------------------
   @override
-  Future<UserModel> resetPassword({ResetPasswordParams? resetPasswordParams}) {
-    // TODO: implement resetPassword
+  Future<void> sendResetPassword({
+    ResetPasswordParams? resetPasswordParams,
+  }) async {
+    // try {
+    //   await firebaseService.auth.confirmPasswordReset(
+    //     code: resetPasswordParams!.code,
+    //     newPassword: resetPasswordParams.newPassword,
+    //   );
+    // } on FirebaseAuthException catch (e) {
+    //   throw e.message ?? 'Error while sendind...';
+    // } on ServerException catch (e) {
+    //   throw ServerException(e.message);
+    // }
     throw UnimplementedError();
   }
 
   // --------------------------------------[Send Email Verification]------------------------------------------------
   @override
   Future<UserModel> sendEmailVerification() {
-    // TODO: implement sendEmailVerification
     throw UnimplementedError();
   }
 

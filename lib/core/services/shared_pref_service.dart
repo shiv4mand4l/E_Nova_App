@@ -11,6 +11,6 @@ class SharedPrefService {
 
   Future<bool> getOnboardingStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(onboardingKey) ?? false;
+    return prefs.getBool(onboardingKey) ?? true;
   }
 }

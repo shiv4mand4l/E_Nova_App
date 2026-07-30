@@ -40,6 +40,15 @@ class AppRouter {
       GoRoute(
         path: '/appResetPasswordScreen',
         builder: (context, state) {
+          // log("URI: ${state.uri}");
+          // log("oobCode: ${state.uri.queryParameters['oobCode']}");
+          // final oobCode = state.uri.queryParameters['oobCode'];
+          // if (oobCode == null) {
+          //   return Scaffold(
+          //     appBar: AppBar(),
+          //     body: Center(child: Text('Invalid reset link')),
+          //   );
+          // }
           return ResetPasswordScreen();
         },
       ),

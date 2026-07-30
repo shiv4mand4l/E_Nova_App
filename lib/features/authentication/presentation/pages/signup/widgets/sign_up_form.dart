@@ -1,14 +1,19 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
+
 import 'package:e_nova/core/common/widgets/buttons/app_elevated_button.dart';
 import 'package:e_nova/core/common/widgets/snackbars/app_snackbar.dart';
 import 'package:e_nova/core/constants/app_colors.dart';
 import 'package:e_nova/core/constants/app_sizes.dart';
 import 'package:e_nova/core/constants/app_strings.dart';
 import 'package:e_nova/core/helpers/validator.dart';
+import 'package:e_nova/core/routes/app_routes.dart';
 import 'package:e_nova/features/authentication/params/sign_up_params.dart';
 import 'package:e_nova/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -97,29 +102,68 @@ class _SignUpFormState extends State<SignUpForm> {
                 AppStrings.password,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              TextFormField(
-                validator: AppValidator.validatePassword,
-                controller: passwordController,
-                decoration: InputDecoration(
-                  hintText: AppStrings.passwordExample,
-                  suffixIcon: Icon(Iconsax.eye_slash),
-                ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  final bool isPasswordObsecure =
+                      state is AuthIsPasswordObsecure
+                      ? state.isPasswordObscure
+                      : true;
+                  return TextFormField(
+                    obscureText: isPasswordObsecure,
+                    validator: AppValidator.validatePassword,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      hintText: AppStrings.passwordExample,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(
+                            OnAuthPasswordObsecure(!isPasswordObsecure),
+                          );
+                        },
+                        icon: isPasswordObsecure
+                            ? Icon(Iconsax.eye_slash)
+                            : Icon(Iconsax.eye),
+                      ),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: AppSizes.spaceBtwInputFields),
               Text(
                 AppStrings.conformPassword,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              TextFormField(
-                validator: (value) => AppValidator.validateConfirmPassword(
-                  passwordController.text,
-                  value,
-                ),
-                controller: conformPasswordController,
-                decoration: InputDecoration(
-                  hintText: AppStrings.passwordExample,
-                  suffixIcon: Icon(Iconsax.eye_slash),
-                ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  final bool isConfirmPasswordObsecure =
+                      state is AuthIsPasswordObsecure
+                      ? state.isConfirmPasswordObscure
+                      : true;
+
+                  return TextFormField(
+                    obscureText: isConfirmPasswordObsecure,
+                    validator: (value) => AppValidator.validateConfirmPassword(
+                      passwordController.text,
+                      value,
+                    ),
+                    controller: conformPasswordController,
+                    decoration: InputDecoration(
+                      hintText: AppStrings.passwordExample,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(
+                            OnAuthConfirmPasswordObsecure(
+                              !isConfirmPasswordObsecure,
+                            ),
+                          );
+                        },
+                        icon: isConfirmPasswordObsecure
+                            ? Icon(Iconsax.eye_slash)
+                            : Icon(Iconsax.eye),
+                      ),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: AppSizes.spaceBtwInputFields),
             ],
@@ -172,8 +216,32 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(
             width: double.infinity,
-            child: BlocBuilder<AuthBloc, AuthState>(
+            child: BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSuccess) {
+                  AppSnackbar.success(
+                    context,
+                    message: 'Account Created Successfully🎉',
+                  );
+
+                  firstNameController.clear();
+                  lastNameController.clear();
+                  emailController.clear();
+                  passwordController.clear();
+                  conformPasswordController.clear();
+
+                  context.go(AppRoutes.appLoginScreen);
+                }
+
+                if (state is AuthFailure) {
+                  log(state.message);
+                  AppSnackbar.error(context, message: state.message);
+                }
+              },
               builder: (context, state) {
+                if (state is AuthLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
                 final bool isAccepted = state is AuthTermsChanged
                     ? state.isAccepted
                     : false;
@@ -181,20 +249,24 @@ class _SignUpFormState extends State<SignUpForm> {
                   btnName: AppStrings.signUp,
                   onTap: isAccepted
                       ? () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<AuthBloc>().add(
-                              OnAuthSignUp(
-                                SignUpParams(
-                                  firstName: firstNameController.text.trim(),
-                                  lastName: lastNameController.text.trim(),
-                                  email: emailController.text.trim(),
-                                  password: passwordController.text.trim(),
-                                  confirmPassword: conformPasswordController
-                                      .text
-                                      .trim(),
+                          try {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthBloc>().add(
+                                OnAuthSignUp(
+                                  SignUpParams(
+                                    firstName: firstNameController.text.trim(),
+                                    lastName: lastNameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                    confirmPassword: conformPasswordController
+                                        .text
+                                        .trim(),
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            }
+                          } catch (e) {
+                            throw e.toString();
                           }
                         }
                       : () {

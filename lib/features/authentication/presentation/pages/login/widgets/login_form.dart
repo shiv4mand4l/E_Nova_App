@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:e_nova/core/common/widgets/buttons/app_elevated_button.dart';
+import 'package:e_nova/core/common/widgets/snackbars/app_snackbar.dart';
 import 'package:e_nova/core/helpers/validator.dart';
 import 'package:e_nova/core/routes/app_routes.dart';
 import 'package:e_nova/core/constants/app_sizes.dart';
@@ -61,14 +64,31 @@ class _LoginFormState extends State<LoginForm> {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
 
-              TextFormField(
-                validator: AppValidator.validatePassword,
-                controller: passwordController,
-                decoration: InputDecoration(
-                  // labelText: AppText.password,
-                  hintText: AppStrings.passwordExample,
-                  suffixIcon: Icon(Iconsax.eye_slash),
-                ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  final bool isPasswordObscure = state is AuthIsPasswordObsecure
+                      ? state.isPasswordObscure
+                      : true;
+                  return TextFormField(
+                    obscureText: isPasswordObscure,
+                    validator: AppValidator.validatePassword,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      // labelText: AppText.password,
+                      hintText: AppStrings.passwordExample,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(
+                            OnAuthPasswordObsecure(!isPasswordObscure),
+                          );
+                        },
+                        icon: isPasswordObscure
+                            ? Icon(Iconsax.eye_slash)
+                            : Icon(Iconsax.eye),
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -87,27 +107,53 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: AppSizes.spaceBtwSections),
 
           // Signin Button
-          SizedBox(
-            width: double.infinity,
-            child: BlocBuilder<AuthBloc, AuthState>(
-              builder: (context, state) {
-                return AppElevatedButton(
+          BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthSuccess) {
+                log('Loged in');
+                AppSnackbar.success(context, message: 'Login Successfully🎉');
+
+                emailController.clear();
+                passwordController.clear();
+
+                context.go(AppRoutes.appHomeScreen);
+              }
+
+              if (state is AuthFailure) {
+                log('failure in');
+
+                AppSnackbar.error(context, message: state.message);
+              }
+            },
+            builder: (context, state) {
+              if (state is AuthLoading) {
+                log('loading in');
+
+                return Center(child: CircularProgressIndicator());
+              }
+              return SizedBox(
+                width: double.infinity,
+                child: AppElevatedButton(
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.read<AuthBloc>().add(
-                        OnAuthLogIn(
-                          LogInParams(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
+                    try {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                          OnAuthLogIn(
+                            LogInParams(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
+                    } catch (e) {
+                      throw e.toString();
                     }
                   },
                   btnName: AppStrings.logIn,
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 class ResetPasswordParams {
-  final String password;
-  final String confirmPassword;
+  final String code;
+  final String newPassword;
 
-  ResetPasswordParams({required this.password, required this.confirmPassword});
+  ResetPasswordParams({required this.code, required this.newPassword});
 }

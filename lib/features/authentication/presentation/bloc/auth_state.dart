@@ -15,8 +15,6 @@ final class AuthLoading extends AuthState {
   const AuthLoading();
 }
 
-final class Auth extends AuthState {}
-
 final class AuthSuccess extends AuthState {
   final UserEntity userEntity;
 
@@ -35,6 +33,7 @@ final class AuthFailure extends AuthState {
   List<Object> get props => [message];
 }
 
+// -----------------[For Term and Condition in Sign Up Page]-----------------------------------------------------------
 final class AuthTermsChanged extends AuthState {
   final bool isAccepted;
 
@@ -44,37 +43,20 @@ final class AuthTermsChanged extends AuthState {
   List<Object> get props => [isAccepted];
 }
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------[For Obsecuring the Password]-----------------------------------------------------------
 
-// import 'package:equatable/equatable.dart';
+final class AuthIsPasswordObsecure extends AuthState {
+  final bool isPasswordObscure;
+  final bool isConfirmPasswordObscure;
 
-// class AuthState extends Equatable {
-//   final bool isLoading;
-//   final bool isTermsAccepted;
-//   final String? user;
-//   final String? errorMessage;
+  const AuthIsPasswordObsecure({
+    this.isPasswordObscure = true,
+    this.isConfirmPasswordObscure = true,
+  });
 
-//   const AuthState({
-//     this.isLoading = false,
-//     this.isTermsAccepted = false,
-//     this.user,
-//     this.errorMessage,
-//   });
+  @override
+  List<Object> get props => [isPasswordObscure, isConfirmPasswordObscure];
+}
 
-//   AuthState copyWith({
-//     bool? isLoading,
-//     bool? isTermsAccepted,
-//     String? user,
-//     String? errorMessage,
-//   }) {
-//     return AuthState(
-//       isLoading: isLoading ?? this.isLoading,
-//       isTermsAccepted: isTermsAccepted ?? this.isTermsAccepted,
-//       user: user ?? this.user,
-//       errorMessage: errorMessage ?? this.errorMessage,
-//     );
-//   }
-
-//   @override
-//   List<Object?> get props => [isLoading, isTermsAccepted, user, errorMessage];
-// }
+// -----------------[For Obsecuring the Password]-----------------------------------------------------------
+final class AuthForgotPassword extends AuthState {}
