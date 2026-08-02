@@ -11,7 +11,7 @@ class CreateAccountOrSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(AppRoutes.appSignUpScreen);
+        context.push(AppRoutes.signUpScreen);
       },
       child: RichText(
         text: TextSpan(

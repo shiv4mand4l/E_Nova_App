@@ -1,12 +1,13 @@
 class AppRoutes {
-  // AppRoutes._();
+  AppRoutes._();
 
-  static const appSplashScreen = '/';
-  static const appOnboardingScreen = '/appOnboardingScreen';
-  static const appLoginScreen = '/appLoginScreen';
-  static const appForgotPasswordScreen = '/appForgotPasswordScreen';
-  static const appResetPasswordScreen = '/appResetPasswordScreen';
-  static const appSignUpScreen = '/appSignUpScreen';
-  static const appVerifyYourEmailScreen = '/appVerifyYourEmailScreen';
-  static const appHomeScreen = '/appHomeScreen';
+  static const splashScreen = '/';
+  static const onboardingScreen = '/onboardingScreen';
+  static const loginScreen = '/loginScreen';
+  static const mainScreen = '/mainScreen';
+  static const homeScreen = '/homeScreen';
+  static const forgotPasswordScreen = '/forgotPasswordScreen';
+  static const resetPasswordScreen = '/resetPasswordScreen';
+  static const signUpScreen = '/signUpScreen';
+  static const verifyYourEmailScreen = '/verifyYourEmailScreen';
 }

@@ -11,7 +11,7 @@ class AppAlreadyHaveAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(AppRoutes.appLoginScreen);
+        context.push(AppRoutes.loginScreen);
       },
       child: RichText(
         text: TextSpan(

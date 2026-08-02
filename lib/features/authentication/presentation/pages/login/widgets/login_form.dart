@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:e_nova/core/common/widgets/buttons/app_elevated_button.dart';
+import 'package:e_nova/core/common/widgets/loaders/app_loader.dart';
 import 'package:e_nova/core/common/widgets/snackbars/app_snackbar.dart';
 import 'package:e_nova/core/helpers/validator.dart';
 import 'package:e_nova/core/routes/app_routes.dart';
@@ -98,7 +97,7 @@ class _LoginFormState extends State<LoginForm> {
               offset: Offset(0, -5),
               child: TextButton(
                 onPressed: () {
-                  context.push(AppRoutes.appForgotPasswordScreen);
+                  context.push(AppRoutes.forgotPasswordScreen);
                 },
                 child: Text(AppStrings.forgetPassword),
               ),
@@ -110,26 +109,21 @@ class _LoginFormState extends State<LoginForm> {
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is AuthSuccess) {
-                log('Loged in');
                 AppSnackbar.success(context, message: 'Login Successfully🎉');
 
                 emailController.clear();
                 passwordController.clear();
 
-                context.go(AppRoutes.appHomeScreen);
+                context.go(AppRoutes.mainScreen);
               }
 
               if (state is AuthFailure) {
-                log('failure in');
-
                 AppSnackbar.error(context, message: state.message);
               }
             },
             builder: (context, state) {
               if (state is AuthLoading) {
-                log('loading in');
-
-                return Center(child: CircularProgressIndicator());
+                return Center(child: AppLoader());
               }
               return SizedBox(
                 width: double.infinity,

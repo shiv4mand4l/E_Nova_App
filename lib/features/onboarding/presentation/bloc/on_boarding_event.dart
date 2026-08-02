@@ -16,10 +16,3 @@ class PageChangedEvent extends OnBoardingEvent {
 class SkipBtnEvent extends OnBoardingEvent {}
 
 class ResetSkipBtnEvent extends OnBoardingEvent {}
-
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// This is for When the user is first time in app the the user have to show OnBoarding Screen and If! then the user directly goes on Login Screen
-
-// Runs immediately when the app starts
-class CheckAppStatus extends OnBoardingEvent {}

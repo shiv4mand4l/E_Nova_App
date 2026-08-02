@@ -1,3 +1,4 @@
+import 'package:e_nova/core/common/widgets/loaders/app_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             },
             builder: (context, state) {
               if (state is AuthLoading) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: AppLoader());
               }
               return SizedBox(
                 width: double.infinity,
@@ -91,7 +92,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             alignment: .center,
             child: TextButton(
               onPressed: () {
-                context.go(AppRoutes.appLoginScreen);
+                context.go(AppRoutes.loginScreen);
               },
               child: Text(AppStrings.backToLogin),
             ),

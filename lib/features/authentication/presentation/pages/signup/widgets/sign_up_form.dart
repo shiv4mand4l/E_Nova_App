@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:e_nova/core/common/widgets/loaders/app_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -230,7 +231,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   passwordController.clear();
                   conformPasswordController.clear();
 
-                  context.go(AppRoutes.appLoginScreen);
+                  context.go(AppRoutes.loginScreen);
                 }
 
                 if (state is AuthFailure) {
@@ -240,7 +241,7 @@ class _SignUpFormState extends State<SignUpForm> {
               },
               builder: (context, state) {
                 if (state is AuthLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: AppLoader());
                 }
                 final bool isAccepted = state is AuthTermsChanged
                     ? state.isAccepted

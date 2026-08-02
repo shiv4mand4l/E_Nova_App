@@ -1,3 +1,7 @@
+import 'package:e_nova/features/navigation/presentation/bloc/navigation_bloc.dart';
+import 'package:e_nova/features/splash/data/datasources/local/splash_local_data_source.dart';
+import 'package:e_nova/features/splash/data/repositories/splash_repositories_impl.dart';
+import 'package:e_nova/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +20,8 @@ import 'package:e_nova/features/onboarding/data/local/onboarding_local_data_sour
 import 'package:e_nova/features/onboarding/data/repositories/onboarding_repository_impl.dart';
 import 'package:e_nova/features/onboarding/domain/usecases/check_auth_status_usecase.dart';
 import 'package:e_nova/features/onboarding/presentation/bloc/on_boarding_bloc.dart';
+
+import 'features/splash/domain/usecases/check_app_status_usecase.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -64,6 +70,20 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+
+        BlocProvider(
+          create: (_) => SplashBloc(
+            CheckAppStatusUsecase(
+              SplashRepositoriesImpl(
+                SplashLocalDataSourceImpl(
+                  FirebaseService(),
+                  SharedPrefService(),
+                ),
+              ),
+            ),
+          ),
+        ),
+        BlocProvider(create: (_) => NavigationBloc()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.appRouter,

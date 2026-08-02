@@ -8,9 +8,9 @@ abstract interface class OnboardingLocalDataSource {
 
 class OnboardingLocalDataSourceImpl implements OnboardingLocalDataSource {
   final FirebaseService firebaseService;
-  final SharedPrefService appPreferences;
+  final SharedPrefService sharedPrefService;
 
-  OnboardingLocalDataSourceImpl(this.firebaseService, this.appPreferences);
+  OnboardingLocalDataSourceImpl(this.firebaseService, this.sharedPrefService);
   @override
   Future<bool> isLoggedIn() async {
     // ignore: await_only_futures
@@ -19,6 +19,6 @@ class OnboardingLocalDataSourceImpl implements OnboardingLocalDataSource {
 
   @override
   Future<bool> isOnboardingCompleated() async {
-    return await appPreferences.getOnboardingStatus();
+    return await sharedPrefService.getOnboardingStatus();
   }
 }

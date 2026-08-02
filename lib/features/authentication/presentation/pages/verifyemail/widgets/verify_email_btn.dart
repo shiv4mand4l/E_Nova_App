@@ -14,7 +14,7 @@ class VerifyEmailBtn extends StatelessWidget {
       child: AppElevatedButton(
         btnName: AppStrings.openEmailAppBtn,
         onTap: () {
-          context.push(AppRoutes.appLoginScreen);
+          context.push(AppRoutes.loginScreen);
         },
       ),
     );

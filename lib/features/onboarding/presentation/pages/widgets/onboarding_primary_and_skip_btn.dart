@@ -35,7 +35,7 @@ class OnBoardingPrimaryAndSkipBtn extends StatelessWidget {
               return AppElevatedButton(
                 onTap: () async {
                   if (state.isLastPage == true) {
-                    context.go(AppRoutes.appLoginScreen);
+                    context.go(AppRoutes.loginScreen);
                     await SharedPrefService().saveOnboardingStatus();
                   } else {
                     _pageController.nextPage(

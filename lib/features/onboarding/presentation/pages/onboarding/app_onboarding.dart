@@ -20,12 +20,6 @@ class _AppOnboardingState extends State<AppOnboarding> {
   final PageController _pageController = PageController();
 
   @override
-  void initState() {
-    super.initState();
-    context.read<OnBoardingBloc>().add(CheckAppStatus());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

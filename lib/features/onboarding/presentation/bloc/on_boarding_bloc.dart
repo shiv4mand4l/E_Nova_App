@@ -11,7 +11,6 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
     on<PageChangedEvent>(_pageChanged);
     on<SkipBtnEvent>(_skipBtn);
     on<ResetSkipBtnEvent>(_resetSkipBtn);
-    on<CheckAppStatus>(_checkStatus);
   }
 
   // This is for PageChanged Netx or GetStarted Button
@@ -37,24 +36,4 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   }
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // This is for When the user is first time in app the the user have to show OnBoarding Screen and If! then the user directly goes on Login Screen
-  // class AppBloc extends Bloc<OnBoardingBloc, OnBoardingEvent> {
-
-  Future<void> _checkStatus(
-    CheckAppStatus event,
-    Emitter<OnBoardingState> emit,
-  ) async {
-    emit(OnboardingLoading());
-
-    final result = await checkAuthStatusUsecase();
-
-    if (!result.$1) {
-      emit(GotoOnboarding());
-    } else if (!result.$2) {
-      emit(GotoLogin());
-    } else {
-      emit(GotoHome());
-    }
-  }
 }
