@@ -1,6 +1,6 @@
 import 'package:e_nova/features/bookmarks/presentation/pages/book_mark_screen.dart';
 import 'package:e_nova/features/home/presentation/pages/home_screen.dart';
-import 'package:e_nova/features/home/presentation/widgets/bottom_navigation.dart';
+import 'package:e_nova/features/navigation/presentation/widgets/app_bottom_navigation.dart';
 import 'package:e_nova/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,7 @@ class MainScreen extends StatelessWidget {
         ];
         return Scaffold(
           body: IndexedStack(index: state.currentIndex, children: pages),
-          bottomNavigationBar: const BottomNavigation(),
+          bottomNavigationBar: const AppBottomNavigation(),
         );
       },
     );

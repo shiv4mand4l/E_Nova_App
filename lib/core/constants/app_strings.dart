@@ -69,4 +69,10 @@ class AppStrings {
       "We've sent a verification link to\nname@gmail.com";
   static const String openEmailAppBtn = 'Open Email App';
   static const String resendEmail = 'Resend Email';
+
+  // The Below Texts are for Bottom Navigation Widget
+  static const String home = 'Home';
+  static const String myCourses = "MyCourses";
+  static const String bookmarks = 'Bookmarks';
+  static const String profile = 'Profile';
 }

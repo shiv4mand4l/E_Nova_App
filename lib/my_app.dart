@@ -1,3 +1,4 @@
+import 'package:e_nova/features/home/presentation/pages/home_screen.dart';
 import 'package:e_nova/features/navigation/presentation/bloc/navigation_bloc.dart';
 import 'package:e_nova/features/splash/data/datasources/local/splash_local_data_source.dart';
 import 'package:e_nova/features/splash/data/repositories/splash_repositories_impl.dart';
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        BlocProvider(create: (_) => NavigationBloc()),
+        BlocProvider(create: (_) => NavigationBloc(), child: HomeScreen()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.appRouter,

@@ -6,11 +6,11 @@ class SharedPrefService {
   Future<void> saveOnboardingStatus() async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setBool(onboardingKey, true);
+    await prefs.setBool(onboardingKey, false); // True
   }
 
   Future<bool> getOnboardingStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(onboardingKey) ?? false;
+    return prefs.getBool(onboardingKey) ?? false; //False
   }
 }

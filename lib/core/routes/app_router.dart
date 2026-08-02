@@ -1,11 +1,14 @@
 import 'package:e_nova/features/authentication/presentation/pages/forgotpassword/forgot_password_screen.dart';
 import 'package:e_nova/features/authentication/presentation/pages/login/login_screen.dart';
+import 'package:e_nova/features/bookmarks/presentation/pages/book_mark_screen.dart';
 import 'package:e_nova/features/home/presentation/pages/home_screen.dart';
+import 'package:e_nova/features/mycourse/presentation/pages/my_course_screen.dart';
 import 'package:e_nova/features/navigation/presentation/pages/main_screen.dart';
 import 'package:e_nova/features/onboarding/presentation/pages/onboarding/app_onboarding.dart';
 import 'package:e_nova/features/authentication/presentation/pages/resetpassword/reset_password_screen.dart';
 import 'package:e_nova/features/authentication/presentation/pages/signup/sign_up_screen.dart';
 import 'package:e_nova/features/authentication/presentation/pages/verifyemail/verify_your_email_screen.dart';
+import 'package:e_nova/features/profile/presentation/pages/profile_screen.dart';
 import 'package:e_nova/features/splash/presentation/pages/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,6 +78,24 @@ class AppRouter {
         path: '/homeScreen',
         builder: (context, state) {
           return HomeScreen();
+        },
+      ),
+      GoRoute(
+        path: '/myCourseScreen',
+        builder: (context, state) {
+          return MyCourseScreen();
+        },
+      ),
+      GoRoute(
+        path: '/bookMarksScreen',
+        builder: (context, state) {
+          return BookMarkScreen();
+        },
+      ),
+      GoRoute(
+        path: '/profileScreen',
+        builder: (context, state) {
+          return ProfileScreen();
         },
       ),
     ],

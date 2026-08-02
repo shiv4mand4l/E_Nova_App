@@ -10,4 +10,7 @@ class AppRoutes {
   static const resetPasswordScreen = '/resetPasswordScreen';
   static const signUpScreen = '/signUpScreen';
   static const verifyYourEmailScreen = '/verifyYourEmailScreen';
+  static const myCourseScreen = '/myCourseScreen';
+  static const bookMarksScreen = '/bookMarksScreen';
+  static const profileScreen = '/profileScreen';
 }

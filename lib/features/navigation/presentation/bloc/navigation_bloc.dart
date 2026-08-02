@@ -12,5 +12,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   void _onChangeNavigationIndex(
     OnChangeNavigationIndex event,
     Emitter<NavigationState> emit,
-  ) {}
+  ) {
+    emit(state.copyWith(currentIndex: event.index));
+  }
 }

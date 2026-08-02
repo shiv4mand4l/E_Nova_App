@@ -95,8 +95,13 @@ class _SignUpFormState extends State<SignUpForm> {
               TextFormField(
                 validator: AppValidator.validateEmail,
                 controller: emailController,
+
                 keyboardType: .emailAddress,
-                decoration: InputDecoration(hintText: AppStrings.emailExample),
+                decoration: InputDecoration(
+                  hintText: AppStrings.emailExample,
+                  helperText: '',
+                  helperStyle: TextStyle(fontSize: 12, height: 1.0),
+                ),
               ),
               SizedBox(height: AppSizes.spaceBtwInputFields),
               Text(
@@ -130,9 +135,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 },
               ),
               SizedBox(height: AppSizes.spaceBtwInputFields),
-              Text(
-                AppStrings.conformPassword,
-                style: Theme.of(context).textTheme.bodyLarge,
+              Flexible(
+                child: Text(
+                  AppStrings.conformPassword,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
